@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  AppinessTask
 //
-//  Created by Vivekeerthi on 05/10/20.
+//  Created by HarshaVardhan on 05/10/20.
 //  Copyright © 2020 HarshaVardhan. All rights reserved.
 //
 

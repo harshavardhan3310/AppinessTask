@@ -2,7 +2,7 @@
 //  AppinessTaskTests.swift
 //  AppinessTaskTests
 //
-//  Created by Vivekeerthi on 05/10/20.
+//  Created by HarshaVardhan on 05/10/20.
 //  Copyright © 2020 HarshaVardhan. All rights reserved.
 //
 
@@ -10,6 +10,8 @@ import XCTest
 @testable import AppinessTask
 
 class AppinessTaskTests: XCTestCase {
+    
+    var viewModel: DetailsViewModel?
     
     override func setUp() {
         super.setUp()
@@ -22,8 +24,25 @@ class AppinessTaskTests: XCTestCase {
     }
     
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: "Values", withExtension: "json"),
+            let data = try? Data(contentsOf: url) else {
+                return
+        }
+        
+        let decoder = JSONDecoder()
+        guard let launch = try? decoder.decode(DetailsModel.self, from: data) else {
+            return
+        }
+        self.viewModel = DetailsViewModel.init(detailsData: launch)
+        XCTAssertEqual(self.viewModel?.detailsModel.details?.count, 19)
+        let detailsValues = self.viewModel?.detailsModel.details?[0]
+        XCTAssertEqual(detailsValues?.name, "Sladdar")
+        XCTAssertEqual(detailsValues?.dob, "1992/01/20")
+
+
+
+
     }
     
     func testPerformanceExample() {
